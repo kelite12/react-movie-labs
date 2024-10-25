@@ -48,6 +48,20 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
           </li>
         ))}
       </Paper>
+      <Paper component="ul" sx={{ ...root }}>
+        <li>
+          <Chip label="Production Countries" sx={{ ...chip }} color="primary" />
+        </li>
+        {movie.production_countries && movie.production_countries.length > 0 ? (
+          movie.production_countries.map((country) => (
+            <li key={country.iso_3166_1}>
+              <Chip label={country.name} sx={{ ...chip }} />
+            </li>
+          ))
+        ) : (
+          <Chip label="No country information available" sx={{ ...chip }} />
+        )}
+      </Paper>
       <Paper component="ul" sx={{...root}}>
         <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
         <Chip
