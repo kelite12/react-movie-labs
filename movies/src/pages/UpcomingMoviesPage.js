@@ -26,17 +26,14 @@ const UpcomingMoviesPage = () => {
             })
             .catch(error => console.error("Error fetching upcoming movies:", error));
     }, []);
-    const handlePlaylistAdd = (movie) => {
-        console.log("Added to playlist:", movie.title);
-           };
     
+           const addToPlaylist = (movieId) => true
     return (
         <PageTemplate
           title="UpComing Movies"
           movies={movies}
-          
           action={(movie) => {
-            return <PlaylistAddIcon movie={movie} />
+            return <addToPlaylistIcon movie={movie} />
           }}
 
         />
