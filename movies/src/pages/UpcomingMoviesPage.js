@@ -11,7 +11,20 @@ const UpcomingMoviesPage = () => {
 
     useEffect(() => {
         axios.get(UPCOMING_MOVIES_URL)
-            .then(response => setMovies(response.data.results))
+            .then(response => {
+                const allMovies = response.data.results;
+
+                // 获取当前年份的10月1日
+                const filterDate = new Date(new Date().getFullYear(), 9, 1); // 9表示10月，因为月份是从0开始的
+
+                // 过滤掉上映日期在10月1日之前的电影
+                const filteredMovies = allMovies.filter(movie => {
+                    const releaseDate = new Date(movie.release_date);
+                    return releaseDate >= filterDate;
+                });
+
+                setMovies(filteredMovies);
+            })
             .catch(error => console.error("Error fetching upcoming movies:", error));
     }, []);
 
